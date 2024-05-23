@@ -1,17 +1,6 @@
-
 //  fetch all pages 
 const baseUrl ="https://www.swapi.tech/api/people";
 const peopleContainer = document.getElementById('people-container');
-const onePersonContainer = document.getElementById('one-person-container');
-const onePersonHeader = document.getElementById('one-person-header');
-const PersonDetails = document.getElementById('person-details');
-const doneButton = document.getElementById('done-button');
-
-// show person details only when clicked 
-onePersonContainer.hidden = true;
-
-
-
 async function fetchRecords() {
     try {
         const response = await fetch('https://www.swapi.tech/api/people');
@@ -48,6 +37,7 @@ async function getallPages(urls) {
 console.log("finalList:", finalList);
 for(let person of finalList){
     let personElt =document.createElement("div");
+    let personUrl=person.url;
     personElt.className = 'person';
 
     // add a header 
@@ -56,8 +46,9 @@ for(let person of finalList){
     personElt.appendChild(personHeader);
     peopleContainer.appendChild(personElt);
 
-    // ADD EVEN HANDLER FOR A CLICK OF PERSON
-}
+        personElt.addEventListener("click",()=>{
+})
 return finalList;
     });
 }
+
