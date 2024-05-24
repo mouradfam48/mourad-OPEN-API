@@ -1,3 +1,4 @@
+
 //  fetch all pages 
 const baseUrl ="https://www.swapi.tech/api/people";
 const peopleContainer = document.getElementById('people-container');
@@ -47,8 +48,12 @@ for(let person of finalList){
     peopleContainer.appendChild(personElt);
 
         personElt.addEventListener("click",()=>{
-})
+
+           Params.append(url, personUrl);
+           const Params = personUrlFile +'?'+ Params.toString();
+           console.log("ParamsURL: "+ParamsURL);
+           window.location.href = ParamsURL;
+});
 return finalList;
     });
 }
-
