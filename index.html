@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="index.Css" rel="stylesheet" type="text/css">
     <title> api Project </title>
+
 </head>
+
 <body>
-   <section id="people-section">
-    <h1>people </h1>
+  <h1> Cats & Dogs</h1>
 
-<div id = "one-person-container">
-    <h2 id="one-person-header"></h2>
-<ul id = "person-details" > </ul>
-<button id = "done-button"> </button>
-</div>
+  <nav>
 
-<div id="people-container">  
-</div>
+    <a href="/dogs/">Dogs<span>🐶</span></a>
+    <a href="/cats/">Cats<span>🐱</span></a>
+  </nav>
+  <main>
 
-   </section> 
+  <button id="fetchDog">Dogs</button>
+<button id="fetchCat">cats</button>
+<div id="catOrDogContainer"></div>
 
+<p>Welcome to my cool Cats & Dogs site!</p>
+<p>Click on the links above for cats or dogs.</p>
 
-    <script src="/index.js"></script>
+  <script src="index.js"></script>
+
 </body>
+
 </html>

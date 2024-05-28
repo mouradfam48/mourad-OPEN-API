@@ -1,59 +1,75 @@
+const catOrDogContainer = document.getElementById("catOrDogContainer");
+const fetchCatBtn = document.getElementById("fetchCat");
+const fetchDogBtn = document.getElementById("fetchDog");
 
-//  fetch all pages 
-const baseUrl ="https://www.swapi.tech/api/people";
-const peopleContainer = document.getElementById('people-container');
-async function fetchRecords() {
-    try {
-        const response = await fetch('https://www.swapi.tech/api/people');
-        if (!response.ok) {
-            throw new Error('Request failed' );
-        }
+// Fetch a cat
+fetchCatBtn.addEventListener("click", () => {
+  fetch(
+    "https://api.thecatapi.com/v1/images/search?limit=1&has_breeds=1&api_key=live_YNdBDkb6hJuKn2sTeEUeI2J2p14xqL77loXkCwJJVr284EgKEM1nSrVDrdrpCZKb"
+  )
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Invalid Request");
+      }
+      return res.json();
+    })
+    .then((data) => {
+      // Clear out previous cat
+      catOrDogContainer.innerHTML = "";
 
-        let record = await response.json();
-        console.log("record:", record);
-        const recordLength = record.total_pages;
-        console.log('Data fetched successfully:', recordLength);
+      const catImgUrl = data[0].url;
+      const catImg = document.createElement("img");
+      catImg.src = catImgUrl;
 
-        const pageUrl = baseUrl + "?page=";
-        const urls = [];
-        for (let i = 0; i < recordLength; i++) {
-            urls.push(pageUrl +(i+1 ));
-        }
-        console.log(urls);
-        getallPages(urls);
-    } catch (error) {
-        console.error('An error occurred:',error);
-    }
-}
-fetchRecords();
+      const breedName = data[0].breeds[0].name;
+      const catBreedTitle = document.createElement("h2");
+      catBreedTitle.innerText = breedName;
 
-async function getallPages(urls) {
-    const promisesList = urls.map(Text=> fetch(Text)).then(r=> r.json().catch(err => console.log(err)));
-    const finalResult = await Promise.all(promisesList).then(result  =>{
-    let finalList = []
-    result.forEach(res => {
-     finalList= finalList.concat(res.results);
+      const breedDescription = document.createElement("p");
+      breedDescription.innerText = data[0].breeds[0].description;
+
+      catOrDogContainer.appendChild(catBreedTitle);
+      catOrDogContainer.appendChild(breedDescription);
+      catOrDogContainer.appendChild(catImg);
+    })
+    .catch((err) => {
+      console.warn(err);
     });
-
-console.log("finalList:", finalList);
-for(let person of finalList){
-    let personElt =document.createElement("div");
-    let personUrl=person.url;
-    personElt.className = 'person';
-
-    // add a header 
-    personHeader.document.createElement("h2");
-    personHeader.innerText=person.name;
-    personElt.appendChild(personHeader);
-    peopleContainer.appendChild(personElt);
-
-        personElt.addEventListener("click",()=>{
-
-           Params.append(url, personUrl);
-           const Params = personUrlFile +'?'+ Params.toString();
-           console.log("ParamsURL: "+ParamsURL);
-           window.location.href = ParamsURL;
 });
-return finalList;
+
+
+
+// Fetch a dog
+fetchDogBtn.addEventListener("click", () => {
+  fetch(
+    "https://api.thedogapi.com/v1/images/search?limit=1&has_breeds=1&api_key=live_cJYKf789eUk5mDuCfoXp2O9FovgZd1gbIDkftrZVjGJgtRclLAkuiP9k0OnrpmMy"
+  )
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Invalid Request");
+      }
+      return res.json();
+    })
+    .then((data) => {
+      // Clear out previous dog
+      catOrDogContainer.innerHTML = "";
+
+      const dogImgUrl = data[0].url;
+      const dogImg = document.createElement("img");
+      dogImg.src = dogImgUrl;
+
+      const breedName = data[0].breeds[0].name;
+      const dogBreedTitle = document.createElement("h2");
+      dogBreedTitle.innerText = breedName;
+
+      const breedTemperament = document.createElement("p");
+      breedTemperament.innerText = data[0].breeds[0].temperament;
+
+      catOrDogContainer.appendChild(dogBreedTitle);
+      catOrDogContainer.appendChild(breedTemperament);
+      catOrDogContainer.appendChild(dogImg);
+    })
+    .catch((err) => {
+      console.warn(err);
     });
-}
+});
